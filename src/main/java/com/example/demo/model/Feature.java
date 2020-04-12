@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * Created by Naeem <naeemark@gmail.com>.
  * <p>
- * Created on: 2020-04-11
+ * Created on: 2020-04-12
  */
 
 @Data
@@ -20,29 +20,21 @@ import java.util.Set;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "features")
+public class Feature {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(unique = true)
-    private String email;
+    private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "users_features",
-            joinColumns = {
-                    @JoinColumn(name = "user_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "feature_id")
-            }
-    )
-    private Set<Feature> features = new HashSet<>();
+    @ManyToMany(mappedBy = "features", cascade = {CascadeType.ALL})
+    private Set<User> users = new HashSet<>();
 
-    public User(String email) {
-        this.email = email;
+    public Feature(String name) {
+        this.name = name;
     }
 
     @Override
@@ -61,7 +53,7 @@ public class User {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        User other = (User) obj;
+        Feature other = (Feature) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -69,5 +61,4 @@ public class User {
             return false;
         return true;
     }
-
 }
