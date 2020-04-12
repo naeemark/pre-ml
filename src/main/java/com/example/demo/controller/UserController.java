@@ -79,12 +79,16 @@ public class UserController {
 
         User user = userRepository.findByEmail(accessRequest.getEmail());
         if(user == null){
-            user = userRepository.save(new User(accessRequest.getEmail()));
+            user = new User(accessRequest.getEmail());
         }
+
+        logger.info(user.toString());
 
         Feature feature = featureRepository.findByName(accessRequest.getFeatureName());
         if(feature == null)
-            feature = featureRepository.save(new Feature(accessRequest.getFeatureName()));
+            feature = new Feature(accessRequest.getFeatureName());
+
+        logger.info(feature.toString());
 
         user.getFeatures().add(feature);
         userRepository.save(user);
