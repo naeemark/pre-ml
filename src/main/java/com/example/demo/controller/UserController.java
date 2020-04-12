@@ -8,8 +8,13 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -23,7 +28,6 @@ import java.util.List;
 public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(DemoApplication.class);
-
 
     @Autowired
     private UserJpaRepository userJpaRepository;
@@ -47,6 +51,11 @@ public class UserController {
     @PostMapping(value = "/user")
     public User saveUser(@RequestBody User user) {
         logger.info(String.valueOf(user));
+        boolean exists = userJpaRepository.existsByEmail(user.getEmail());
+        logger.info("exist:" + exists);
+        if (exists) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "entity already exists");
+        }
         return userJpaRepository.save(user);
     }
 }
