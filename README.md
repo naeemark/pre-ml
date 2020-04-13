@@ -51,6 +51,10 @@ Demonstration of Requirements understanding, proposing a solution and implementa
  * **GET** `{baseURL}/api/feature/all` - Returns All features,
  * **GET** `{baseURL}/api/feature/{featureName}` - Returns a feature with the provided `featureName`
  
+### Development Cycle:
+- Distributes the whole development into Small tasks
+- [Each commit](https://github.com/naeemark/SwitchAccess/commits/master) shows a small progress
+- [Pull Requests](https://github.com/naeemark/SwitchAccess/pulls?q=is%3Apr+is%3Aclosed) are done for major tasks
  
 ## How do I get set up? ##
 
