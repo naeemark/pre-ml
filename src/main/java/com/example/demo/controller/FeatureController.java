@@ -46,16 +46,8 @@ public class FeatureController {
     }
 
     @ApiOperation(value = "Get Feature by Name", response = Feature.class, tags = {"Retrieve Features"})
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success"),
-            @ApiResponse(code = 400, message = "Validation Error")
-    })
     @GetMapping(value = "/feature/{featureName}")
     public Feature findByName(@PathVariable String featureName) {
-
-        if (Strings.isNullOrEmpty(featureName)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Validation Error");
-        }
 
         logger.info(featureName);
         Feature feature = featureRepository.findByName(featureName);

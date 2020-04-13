@@ -1,7 +1,9 @@
 package com.example.demo.utils;
 
+import com.example.demo.model.AccessRequest;
 import com.example.demo.model.Feature;
 import com.example.demo.model.User;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.HashSet;
 
@@ -16,4 +18,15 @@ public class TestDataFactory {
     }
 
 
+    public static AccessRequest getAccessRequest(String email, String featureName, boolean enable){
+        return new AccessRequest(email, featureName, enable);
+    }
+
+    public static String asJsonString(Object object){
+        try {
+            return new ObjectMapper().writeValueAsString(object);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
