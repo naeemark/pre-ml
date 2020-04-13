@@ -6,6 +6,8 @@ import com.example.demo.model.Feature;
 import com.example.demo.model.User;
 import com.example.demo.repository.FeatureRepository;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.utils.Utils;
+import com.google.common.base.Strings;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -17,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.Random;
 
 /**
@@ -51,6 +54,11 @@ public class AccessController {
     @GetMapping
     public AccessResponse retrieveFeatureAccess(@RequestParam String email, @RequestParam String featureName) {
 
+        if (Strings.isNullOrEmpty(email)  || !Utils.isValidEmail(email)
+                || Strings.isNullOrEmpty(featureName)){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Validation Error");
+        }
+
         User user = userRepository.findByEmail(email);
         Feature feature = featureRepository.findByName(featureName);
 
@@ -73,10 +81,11 @@ public class AccessController {
     @ApiOperation(value = "Update Feature Access", tags = {"Access Retrieve / Update"})
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success"),
-            @ApiResponse(code = 304, message = "Update Request was not successful")
+            @ApiResponse(code = 304, message = "Update Request was not successful"),
+            @ApiResponse(code = 400, message = "Validation Error")
     })
     @PostMapping
-    public void updateFeatureAccess(@RequestBody AccessRequest accessRequest) {
+    public void updateFeatureAccess(@Valid @RequestBody AccessRequest accessRequest) {
 
         logger.info(accessRequest.toString());
 
