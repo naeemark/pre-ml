@@ -7,6 +7,16 @@
 
 Demonstration of Requirements understanding, proposing a solution and implementation by using the latest tools and techniques.
 
+---
+
+## Distribution ##
+
+ - [Swagger API Docs](http://ec2-54-251-176-193.ap-southeast-1.compute.amazonaws.com/swagger-ui.html)
+ - A [Postman Collection](https://www.getpostman.com/collections/01221eb5bd755dd9295e) is available for all the API's (live).
+ - A [docker repository](https://hub.docker.com/repository/registry-1.docker.io/naeemark/assessment) is created, latest image can be downloaded
+ - **[Sonar Project](https://sonarcloud.io/dashboard?id=naeemark_SwitchAccess)**
+
+---
 
 ### What is this repository for? ###
 
@@ -103,8 +113,8 @@ To set-up the project locally you need to clone this repo, from `master` or `dev
 ## External Tools: ##
 
 - **[Github Actions](https://github.com/features/actions)**
-- **[Docker](https://www.docker.com/)**:
-- **[SonarCould](https://sonarcloud.io/)**:
+- **[Docker](https://www.docker.com/)**
+- **[SonarCould](https://sonarcloud.io/)**
 
 
 ## Deployment
@@ -116,15 +126,6 @@ To set-up the project locally you need to clone this repo, from `master` or `dev
     - Creates the Docker Image and pushes to [Docker Repository](https://hub.docker.com/repository/registry-1.docker.io/naeemark/assessment)
     
 - As a next step, login to ec2 instance using ssh and pull the latest Docker Image and start a new container
-
-
-## Distribution ##
-
- - [Swagger API Docs](http://ec2-54-251-176-193.ap-southeast-1.compute.amazonaws.com/swagger-ui.html)
- - A [Postman Collection](https://www.getpostman.com/collections/01221eb5bd755dd9295e) is available for all the API's (live).
- - A [docker repository](https://hub.docker.com/repository/registry-1.docker.io/naeemark/assessment) is created, latest image can be downloaded
- - **[Sonar Project](https://sonarcloud.io/dashboard?id=naeemark_SwitchAccess)**
-
 
 
 ## Contribution guidelines ##
