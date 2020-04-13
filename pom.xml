@@ -141,7 +141,6 @@
                 <sonar.organization>switch-access</sonar.organization>
                 <sonar.projectKey>naeemark_SwitchAccess</sonar.projectKey>
                 <sonar.projectName>SwitchAccess</sonar.projectName>
-                <sonar.login>43c5d152e3e5786f99c21a6ea7534ef021b3cde0</sonar.login>
                 <sonar.inclusions>src/main/java/**</sonar.inclusions>
                 <sonar.exclusions>${code.coverage.exclusions}</sonar.exclusions>
                 <sonar.test.exclusions>**/test/**</sonar.test.exclusions>
