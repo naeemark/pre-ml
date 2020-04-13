@@ -8,15 +8,13 @@ import lombok.ToString;
 /**
  * Created by Naeem <naeemark@gmail.com>.
  * <p>
- * Created on: 2020-04-12
+ * Created on: 2020-04-13
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class AccessRequest {
+public class AccessResponse {
 
-    private String email;
-    private String featureName;
-    private boolean enable;
+    private boolean canAccess;
 }

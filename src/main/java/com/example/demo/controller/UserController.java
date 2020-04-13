@@ -1,9 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.DemoApplication;
+import com.example.demo.model.AccessRequest;
 import com.example.demo.model.Feature;
 import com.example.demo.model.User;
-import com.example.demo.model.AccessRequest;
 import com.example.demo.repository.FeatureRepository;
 import com.example.demo.repository.UserRepository;
 import io.swagger.annotations.Api;
@@ -27,7 +26,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class UserController {
 
-    private static final Logger logger = LoggerFactory.getLogger(DemoApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -74,25 +73,36 @@ public class UserController {
      *  }
      *
      */
-    public AccessRequest save(@RequestBody AccessRequest accessRequest){
+    public void save(@RequestBody AccessRequest accessRequest) {
         logger.info(accessRequest.toString());
 
-        User user = userRepository.findByEmail(accessRequest.getEmail());
-        if(user == null){
-            user = new User(accessRequest.getEmail());
+        if (accessRequest.isEnable()) {
+            User user = userRepository.findByEmail(accessRequest.getEmail());
+            if (user == null) {
+                user = new User(accessRequest.getEmail());
+            }
+            logger.info(user.toString());
+
+            Feature feature = featureRepository.findByName(accessRequest.getFeatureName());
+            if (feature == null) {
+                feature = new Feature(accessRequest.getFeatureName());
+            }
+            logger.info(feature.toString());
+
+            if (!user.getFeatures().contains(feature)) {
+                user.getFeatures().add(feature);
+                userRepository.save(user);
+                return;
+            }
+        } else {
+            User user = userRepository.findByEmail(accessRequest.getEmail());
+            Feature feature = featureRepository.findByName(accessRequest.getFeatureName());
+            if (user != null && feature != null && user.getFeatures().contains(feature)) {
+                user.getFeatures().remove(feature);
+                userRepository.save(user);
+                return;
+            }
         }
-
-        logger.info(user.toString());
-
-        Feature feature = featureRepository.findByName(accessRequest.getFeatureName());
-        if(feature == null)
-            feature = new Feature(accessRequest.getFeatureName());
-
-        logger.info(feature.toString());
-
-        user.getFeatures().add(feature);
-        userRepository.save(user);
-
-        return accessRequest;
+        throw new ResponseStatusException(HttpStatus.NOT_MODIFIED, "Request update was not successful");
     }
 }
