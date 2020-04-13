@@ -1,13 +1,10 @@
-package com.example.demo.controller;
+package com.naeemark.sa.controller;
 
-import com.example.demo.DemoApplication;
-import com.example.demo.model.Feature;
-import com.example.demo.repository.FeatureRepository;
-import com.google.common.base.Strings;
+import com.naeemark.sa.SwitchAccessApplication;
+import com.naeemark.sa.model.Feature;
+import com.naeemark.sa.repository.FeatureRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +27,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class FeatureController {
 
-    private static final Logger logger = LoggerFactory.getLogger(DemoApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(SwitchAccessApplication.class);
 
     @Autowired
     private FeatureRepository featureRepository;

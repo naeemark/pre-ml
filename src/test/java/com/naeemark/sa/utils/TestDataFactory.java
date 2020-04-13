@@ -1,8 +1,8 @@
-package com.example.demo.utils;
+package com.naeemark.sa.utils;
 
-import com.example.demo.model.AccessRequest;
-import com.example.demo.model.Feature;
-import com.example.demo.model.User;
+import com.naeemark.sa.model.AccessRequest;
+import com.naeemark.sa.model.Feature;
+import com.naeemark.sa.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.HashSet;

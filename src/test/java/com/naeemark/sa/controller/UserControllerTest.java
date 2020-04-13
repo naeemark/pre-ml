@@ -1,6 +1,7 @@
-package com.example.demo.controller;
+package com.naeemark.sa.controller;
 
-import com.example.demo.repository.UserRepository;
+import com.naeemark.sa.repository.UserRepository;
+import com.naeemark.sa.utils.TestDataFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Collections;
 
-import static com.example.demo.utils.TestDataFactory.getSingleUser;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -58,7 +58,7 @@ class UserControllerTest {
     @DisplayName("GET a list with single User")
     void testAllUsersWithSingleRecords() throws Exception {
         //given
-        when(repository.findAll()).thenReturn(Collections.singletonList(getSingleUser(1, "abc@gmail.com")));
+        when(repository.findAll()).thenReturn(Collections.singletonList(TestDataFactory.getSingleUser(1, "abc@gmail.com")));
 
         mockMvc.perform(get("/api/user/all"))
                 .andDo(print())
@@ -76,7 +76,7 @@ class UserControllerTest {
         String email = "abc@gmail.com";
 
         //given
-        when(repository.findByEmail(email)).thenReturn(getSingleUser(1, email));
+        when(repository.findByEmail(email)).thenReturn(TestDataFactory.getSingleUser(1, email));
 
         mockMvc.perform(get("/api/user/"+email))
                 .andDo(print())
@@ -109,7 +109,7 @@ class UserControllerTest {
         String email = "abc@gmail.com";
 
         //given
-        when(repository.findByEmail(email)).thenReturn(getSingleUser(1, email));
+        when(repository.findByEmail(email)).thenReturn(TestDataFactory.getSingleUser(1, email));
 
         mockMvc.perform(get("/api/user/abc.123"))
                 .andDo(print())

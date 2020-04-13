@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.naeemark.sa;
 
 import com.google.common.base.Predicates;
 import org.springframework.boot.SpringApplication;
@@ -12,10 +12,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @SpringBootApplication
-public class DemoApplication {
+public class SwitchAccessApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(SwitchAccessApplication.class, args);
     }
 
     @Bean

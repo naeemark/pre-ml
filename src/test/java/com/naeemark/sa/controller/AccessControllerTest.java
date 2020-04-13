@@ -1,11 +1,11 @@
-package com.example.demo.controller;
+package com.naeemark.sa.controller;
 
-import com.example.demo.model.AccessRequest;
-import com.example.demo.model.Feature;
-import com.example.demo.model.User;
-import com.example.demo.repository.FeatureRepository;
-import com.example.demo.repository.UserRepository;
-import com.example.demo.utils.TestDataFactory;
+import com.naeemark.sa.model.AccessRequest;
+import com.naeemark.sa.model.Feature;
+import com.naeemark.sa.model.User;
+import com.naeemark.sa.repository.FeatureRepository;
+import com.naeemark.sa.repository.UserRepository;
+import com.naeemark.sa.utils.TestDataFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +16,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static com.example.demo.utils.TestDataFactory.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -54,8 +53,8 @@ class AccessControllerTest {
         String email = "abc@gmail.com";
         String featureName = "ABC";
 
-        User user = getSingleUser(1, email);
-        Feature feature = getSingleFeature(1, featureName);
+        User user = TestDataFactory.getSingleUser(1, email);
+        Feature feature = TestDataFactory.getSingleFeature(1, featureName);
         user.getFeatures().add(feature);
 
         //given
@@ -76,8 +75,8 @@ class AccessControllerTest {
     @DisplayName("GET Feature Access - Failed")
     void testFeatureAccess_withoutFeatureBind() throws Exception {
         //given
-        when(userRepository.findByEmail(email)).thenReturn(getSingleUser(1, email));
-        when(featureRepository.findByName(featureName)).thenReturn(getSingleFeature(1, featureName));
+        when(userRepository.findByEmail(email)).thenReturn(TestDataFactory.getSingleUser(1, email));
+        when(featureRepository.findByName(featureName)).thenReturn(TestDataFactory.getSingleFeature(1, featureName));
 
         // when
         mockMvc.perform(get("/feature").queryParam("email", email).queryParam("featureName", featureName))
@@ -93,8 +92,8 @@ class AccessControllerTest {
     void testFeatureAccess_withoutParamEmail() throws Exception {
 
         //given
-        when(userRepository.findByEmail(email)).thenReturn(getSingleUser(1, email));
-        when(featureRepository.findByName(featureName)).thenReturn(getSingleFeature(1, featureName));
+        when(userRepository.findByEmail(email)).thenReturn(TestDataFactory.getSingleUser(1, email));
+        when(featureRepository.findByName(featureName)).thenReturn(TestDataFactory.getSingleFeature(1, featureName));
 
         // when
         mockMvc.perform(get("/feature").queryParam("featureName", featureName))
@@ -108,8 +107,8 @@ class AccessControllerTest {
     void testFeatureAccess_withoutParamFeatureName() throws Exception {
 
         //given
-        when(userRepository.findByEmail(email)).thenReturn(getSingleUser(1, email));
-        when(featureRepository.findByName(featureName)).thenReturn(getSingleFeature(1, featureName));
+        when(userRepository.findByEmail(email)).thenReturn(TestDataFactory.getSingleUser(1, email));
+        when(featureRepository.findByName(featureName)).thenReturn(TestDataFactory.getSingleFeature(1, featureName));
 
         // when
         mockMvc.perform(get("/feature").queryParam("email", email))
@@ -122,10 +121,10 @@ class AccessControllerTest {
     @DisplayName("POST Feature Access Update Enable=True")
     public void testFeatureAccessUpdateEnableTrue() throws Exception {
         //given
-        AccessRequest accessRequest = getAccessRequest(email, featureName, true);
+        AccessRequest accessRequest = TestDataFactory.getAccessRequest(email, featureName, true);
         //given
-        when(userRepository.findByEmail(email)).thenReturn(getSingleUser(1, email));
-        when(featureRepository.findByName(featureName)).thenReturn(getSingleFeature(1, featureName));
+        when(userRepository.findByEmail(email)).thenReturn(TestDataFactory.getSingleUser(1, email));
+        when(featureRepository.findByName(featureName)).thenReturn(TestDataFactory.getSingleFeature(1, featureName));
 
         //when
         mockMvc.perform(post("/feature")
@@ -140,7 +139,7 @@ class AccessControllerTest {
     @DisplayName("POST Feature Access Update Enable=True New Record")
     public void testFeatureAccessUpdateEnableTrueNewRecord() throws Exception {
         //given
-        AccessRequest accessRequest = getAccessRequest(email, featureName, true);
+        AccessRequest accessRequest = TestDataFactory.getAccessRequest(email, featureName, true);
         //given
         when(userRepository.findByEmail(email)).thenReturn(null);
         when(featureRepository.findByName(featureName)).thenReturn(null);
@@ -158,9 +157,9 @@ class AccessControllerTest {
     @DisplayName("POST Feature Access Update Enable=True - Existing Access")
     public void testFeatureAccessUpdateEnableTrueExistingAccess() throws Exception {
         //given
-        AccessRequest accessRequest = getAccessRequest(email, featureName, true);
-        User user = getSingleUser(1, email);
-        Feature feature = getSingleFeature(1, featureName);
+        AccessRequest accessRequest = TestDataFactory.getAccessRequest(email, featureName, true);
+        User user = TestDataFactory.getSingleUser(1, email);
+        Feature feature = TestDataFactory.getSingleFeature(1, featureName);
         user.getFeatures().add(feature);
 
         //given
@@ -180,10 +179,10 @@ class AccessControllerTest {
     @DisplayName("POST Feature Access Update Enable=False")
     public void testFeatureAccessUpdateEnableFalse() throws Exception {
         //given
-        AccessRequest accessRequest = getAccessRequest(email, featureName, false);
+        AccessRequest accessRequest = TestDataFactory.getAccessRequest(email, featureName, false);
         //given
-        when(userRepository.findByEmail(email)).thenReturn(getSingleUser(1, email));
-        when(featureRepository.findByName(featureName)).thenReturn(getSingleFeature(1, featureName));
+        when(userRepository.findByEmail(email)).thenReturn(TestDataFactory.getSingleUser(1, email));
+        when(featureRepository.findByName(featureName)).thenReturn(TestDataFactory.getSingleFeature(1, featureName));
 
         //when
         mockMvc.perform(post("/feature")
@@ -199,9 +198,9 @@ class AccessControllerTest {
     @DisplayName("POST Feature Access Update Enable=False - Existing Access")
     public void testFeatureAccessUpdateEnableFalseExistingAccess() throws Exception {
         //given
-        AccessRequest accessRequest = getAccessRequest(email, featureName, false);
-        User user = getSingleUser(1, email);
-        Feature feature = getSingleFeature(1, featureName);
+        AccessRequest accessRequest = TestDataFactory.getAccessRequest(email, featureName, false);
+        User user = TestDataFactory.getSingleUser(1, email);
+        Feature feature = TestDataFactory.getSingleFeature(1, featureName);
         user.getFeatures().add(feature);
 
         //given
@@ -221,9 +220,9 @@ class AccessControllerTest {
     @DisplayName("POST Feature Access Update Invalid param")
     public void testFeatureAccessUpdateInvalidParam() throws Exception {
         //given
-        AccessRequest accessRequest = getAccessRequest("abc", featureName, false);
-        User user = getSingleUser(1, email);
-        Feature feature = getSingleFeature(1, featureName);
+        AccessRequest accessRequest = TestDataFactory.getAccessRequest("abc", featureName, false);
+        User user = TestDataFactory.getSingleUser(1, email);
+        Feature feature = TestDataFactory.getSingleFeature(1, featureName);
         user.getFeatures().add(feature);
 
         //given
@@ -243,9 +242,9 @@ class AccessControllerTest {
     @DisplayName("POST Feature Access Update Invalid param NUll")
     public void testFeatureAccessUpdateInvalidParamNull() throws Exception {
         //given
-        AccessRequest accessRequest = getAccessRequest("abc", null, false);
-        User user = getSingleUser(1, email);
-        Feature feature = getSingleFeature(1, featureName);
+        AccessRequest accessRequest = TestDataFactory.getAccessRequest("abc", null, false);
+        User user = TestDataFactory.getSingleUser(1, email);
+        Feature feature = TestDataFactory.getSingleFeature(1, featureName);
         user.getFeatures().add(feature);
 
         //given

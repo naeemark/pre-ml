@@ -1,6 +1,7 @@
-package com.example.demo.controller;
+package com.naeemark.sa.controller;
 
-import com.example.demo.repository.FeatureRepository;
+import com.naeemark.sa.repository.FeatureRepository;
+import com.naeemark.sa.utils.TestDataFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Collections;
 
-import static com.example.demo.utils.TestDataFactory.getSingleFeature;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -57,7 +57,7 @@ class FeatureControllerTest {
     @DisplayName("GET a list with single Feature")
     void testAllFeaturesWithSingleRecords() throws Exception {
         //given
-        when(repository.findAll()).thenReturn(Collections.singletonList(getSingleFeature(1, "abc")));
+        when(repository.findAll()).thenReturn(Collections.singletonList(TestDataFactory.getSingleFeature(1, "abc")));
 
         mockMvc.perform(get("/api/feature/all"))
                 .andDo(print())
@@ -75,7 +75,7 @@ class FeatureControllerTest {
         String name = "abc";
 
         //given
-        when(repository.findByName(name)).thenReturn(getSingleFeature(1, name));
+        when(repository.findByName(name)).thenReturn(TestDataFactory.getSingleFeature(1, name));
 
         mockMvc.perform(get("/api/feature/"+name))
                 .andDo(print())
