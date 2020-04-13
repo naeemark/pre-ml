@@ -153,4 +153,12 @@
         </profile>
     </profiles>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>Assessment Tack for MoneyLion</name>
+            <url>https://maven.pkg.github.com/naeemark/SwitchAccess</url>
+        </repository>
+    </distributionManagement>
+
 </project>
