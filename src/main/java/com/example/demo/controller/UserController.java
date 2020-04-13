@@ -2,8 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.utils.Utils;
+import com.google.common.base.Strings;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +46,16 @@ public class UserController {
     }
 
     @ApiOperation(value = "Get User by Email", response = User.class, tags = {"Retrieve Users"})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success"),
+            @ApiResponse(code = 400, message = "Validation Error")
+    })
     @GetMapping(value = "/user/{email}")
     public User findByEmail(@PathVariable String email) {
+
+        if (!Utils.isValidEmail(email)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Validation Error");
+        }
 
         logger.info(String.valueOf(email));
         User user = userRepository.findByEmail(email);

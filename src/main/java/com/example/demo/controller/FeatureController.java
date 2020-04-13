@@ -4,8 +4,12 @@ import com.example.demo.DemoApplication;
 import com.example.demo.model.Feature;
 import com.example.demo.model.User;
 import com.example.demo.repository.FeatureRepository;
+import com.example.demo.utils.Utils;
+import com.google.common.base.Strings;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,11 +48,19 @@ public class FeatureController {
     }
 
     @ApiOperation(value = "Get Feature by Name", response = Feature.class, tags = {"Retrieve Features"})
-    @GetMapping(value = "/feature/{name}")
-    public Feature findByEmail(@PathVariable String name) {
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success"),
+            @ApiResponse(code = 400, message = "Validation Error")
+    })
+    @GetMapping(value = "/feature/{featureName}")
+    public Feature findByEmail(@PathVariable String featureName) {
 
-        logger.info(name);
-        Feature feature = featureRepository.findByName(name);
+        if (Strings.isNullOrEmpty(featureName)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Validation Error");
+        }
+
+        logger.info(featureName);
+        Feature feature = featureRepository.findByName(featureName);
         if (feature == null)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Requested data not found");
         return feature;

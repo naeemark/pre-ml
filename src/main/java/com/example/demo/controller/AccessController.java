@@ -29,7 +29,7 @@ import java.util.Random;
  * <p>
  * Created on: 2020-04-13
  */
-@Api(tags = "Access Retrieve / Update", description="Operations related to Access Management - Functional Requirement")
+@Api(tags = "Access Retrieve / Update", description = "Operations related to Access Management - Functional Requirement")
 @RestController
 @RequestMapping("/feature")
 public class AccessController {
@@ -44,18 +44,21 @@ public class AccessController {
 
     /**
      * Sample Request Params
-     *  /feature?email=abc@gmail.com&featureName=A
+     * /feature?email=abc@gmail.com&featureName=A
      *
      * @param email
      * @param featureName
      * @return
      */
     @ApiOperation(value = "Retrieve Feature Access", response = AccessResponse.class, tags = {"Access Retrieve / Update"})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success"),
+            @ApiResponse(code = 400, message = "Validation Error")
+    })
     @GetMapping
     public AccessResponse retrieveFeatureAccess(@RequestParam String email, @RequestParam String featureName) {
 
-        if (Strings.isNullOrEmpty(email)  || !Utils.isValidEmail(email)
-                || Strings.isNullOrEmpty(featureName)){
+        if (!Utils.isValidEmail(email) || Strings.isNullOrEmpty(featureName)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Validation Error");
         }
 
@@ -71,9 +74,9 @@ public class AccessController {
     /**
      * Sample Request Params
      * {
-     * 	"email": "abcd@gmail.com",
-     * 	"featureName": "A",
-     * 	"enable": true
+     * "email": "abcd@gmail.com",
+     * "featureName": "A",
+     * "enable": true
      * }
      *
      * @param accessRequest
