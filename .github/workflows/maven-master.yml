@@ -31,6 +31,6 @@ jobs:
         with:
           java-version: 1.8.0
       - name: SonarCloud Scan
-        run: mvn -B clean sonar:sonar
+        run: mvn -B clean test sonar:sonar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
