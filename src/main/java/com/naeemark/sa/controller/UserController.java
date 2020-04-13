@@ -1,9 +1,8 @@
-package com.example.demo.controller;
+package com.naeemark.sa.controller;
 
-import com.example.demo.model.User;
-import com.example.demo.repository.UserRepository;
-import com.example.demo.utils.Utils;
-import com.google.common.base.Strings;
+import com.naeemark.sa.model.User;
+import com.naeemark.sa.repository.UserRepository;
+import com.naeemark.sa.utils.Utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.validation.Valid;
 import java.util.List;
 
 /**

@@ -1,6 +1,6 @@
-package com.example.demo.repository;
+package com.naeemark.sa.repository;
 
-import com.example.demo.model.Feature;
+import com.naeemark.sa.model.Feature;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
