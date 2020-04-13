@@ -2,9 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.DemoApplication;
 import com.example.demo.model.Feature;
-import com.example.demo.model.User;
 import com.example.demo.repository.FeatureRepository;
-import com.example.demo.utils.Utils;
 import com.google.common.base.Strings;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -53,7 +51,7 @@ public class FeatureController {
             @ApiResponse(code = 400, message = "Validation Error")
     })
     @GetMapping(value = "/feature/{featureName}")
-    public Feature findByEmail(@PathVariable String featureName) {
+    public Feature findByName(@PathVariable String featureName) {
 
         if (Strings.isNullOrEmpty(featureName)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Validation Error");
