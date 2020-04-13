@@ -37,7 +37,7 @@ public class UserController {
 
 
     @ApiOperation(value = "Get All Users", notes = "Gets list of all users", response = Object.class, tags = {"Get Users"})
-    @GetMapping(value = "/user")
+    @GetMapping(value = "/user/all")
     public List<User> findAll() {
         List<User> list = userRepository.findAll();
         logger.info(String.valueOf(list));

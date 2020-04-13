@@ -31,7 +31,7 @@ public class FeatureController {
 
 
     @ApiOperation(value = "Get All Features", notes = "Gets list of all features", response = Object.class, tags = {"Get Features"})
-    @GetMapping(value = "/features/all")
+    @GetMapping(value = "/feature/all")
     public List<Feature> findAll() {
         List<Feature> list = featureRepository.findAll();
         logger.info(String.valueOf(list));
