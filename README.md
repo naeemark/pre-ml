@@ -11,7 +11,7 @@ Demonstration of Requirements understanding, proposing a solution and implementa
 
 ## Distribution ##
 
- - [Swagger API Docs](http://ec2-54-251-176-193.ap-southeast-1.compute.amazonaws.com/swagger-ui.html)
+ - [Swagger API Docs](http://ec2-18-140-34-26.ap-southeast-1.compute.amazonaws.com/swagger-ui.html)
  - A [Postman Collection](https://www.getpostman.com/collections/01221eb5bd755dd9295e) is available for all the API's (live).
  - A [docker repository](https://hub.docker.com/repository/registry-1.docker.io/naeemark/assessment) is created, latest image can be downloaded
  - **[Sonar Project](https://sonarcloud.io/dashboard?id=naeemark_SwitchAccess)**
