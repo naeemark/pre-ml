@@ -5,7 +5,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=naeemark_SwitchAccess&metric=alert_status)](https://sonarcloud.io/dashboard?id=naeemark_SwitchAccess)
 [![Docker](https://img.shields.io/docker/automated/naeemark/assessment)](https://img.shields.io/docker/automated/naeemark/assessment)
 
-Demonstration of Requirements understanding, proposing a solution and implementation by using the latest tools and techniques.
+Demonstration of Requirements understanding, proposing a workable solution and implementation by using the latest tools and techniques.
 
 ---
 
